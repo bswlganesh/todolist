@@ -3,8 +3,6 @@ import "./ShowTask.css"
 export default function ShowTask() {
   const tasks = [
     {
-      "tasks": [
-        {
           "id": 1,
           "name": "love diksha",
           "time": "2025-08-20T11:00:00Z"
@@ -39,8 +37,8 @@ export default function ShowTask() {
           "name": "remind diksha that i love and care about her",
           "time": "2025-08-26T11:30:00Z"
         }
-      ]
-    }
+      
+    
     
   ];
   
