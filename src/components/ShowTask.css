@@ -1,0 +1,37 @@
+
+.list{
+    display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 0 12px;           /* breathing room on small screens */
+  width: 100%;
+}
+.list ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* Always 3 columns on desktop */
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .list li {
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 6px;
+    background: #fdfdfd;
+    word-break: break-word;   /* prevents text overflow */
+  }
+/* Tablet view (max 768px → 2 columns) */
+@media (max-width: 768px) {
+    .list ul {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  /* Mobile view (max 480px → 1 column) */
+  @media (max-width: 480px) {
+    .list ul {
+      grid-template-columns: 1fr;
+    }
+  }

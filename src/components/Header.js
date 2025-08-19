@@ -8,6 +8,7 @@ export default function Header() {
     <>
     <header>
         <img src={logo} className='logo' alt='logo' />
+        <p className='heading'>TODO LIST</p>
         <div className='themes'>THEMES</div>
         
     </header>

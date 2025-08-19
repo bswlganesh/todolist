@@ -1,9 +1,55 @@
-header{
+header {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-}
-.logo{
-    max-height: 3rem;
-}
-
+    background-color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid black;
+  }
+  
+  .logo {
+    height: 50px; /* Adjust as needed */
+    width: auto;
+  }
+  
+  .heading {
+    font-family: 'Times New Roman', serif; /* Change font to match the image */
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0; /* Remove default paragraph margin */
+    flex-grow: 1; /* Allow it to take up space */
+    text-align: center; /* Center the text horizontally */
+  }
+  .themes {
+    font-family: Arial, sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  hr {
+    display: none; /* The header border replaces this */
+  }
+/* 
+  @media (max-width: 600px) {
+    header {
+      
+      align-items: center;
+      gap: 10px;
+    }
+  
+    .logo {
+      height: 40px;
+    }
+  
+    .themes {
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+  } */
