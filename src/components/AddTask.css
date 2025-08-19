@@ -1,0 +1,16 @@
+.form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 2rem;
+}
+.input{
+    height: 2rem;
+}
+.submit{
+    background-color: aqua;
+    /* border: none; */
+    height: 2.4rem;
+    width: 6rem;
+}

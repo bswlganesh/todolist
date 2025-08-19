@@ -1,10 +1,16 @@
+import './App.css'
+import Header from './components/Header'
+import AddTask from './components/AddTask'
+import ShowTask from './components/ShowTask'
 
-import './App.css';
 
-import React from 'react'
 
 export default function App() {
   return (
-    <div>App</div>
+    <>
+    <Header/>
+    <AddTask/>
+    <ShowTask/>
+    </>
   )
 }
