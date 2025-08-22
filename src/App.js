@@ -4,7 +4,7 @@ import Header from './components/Header'
 import AddTask from './components/AddTask'
 import ShowTask from './components/ShowTask'
 import { useState } from 'react'
-
+import Counter from './components/Counter'
 
 
 
@@ -24,35 +24,18 @@ export default function App() {
       "id": 3,
       "name": "attend gym session",
       "time": "2025-08-22T09:00:00Z"
-    },
-    {
-      "id": 4,
-      "name": "call the bank for account update",
-      "time": "2025-08-23T14:00:00Z"
-    },
-    {
-      "id": 5,
-      "name": "read 20 pages of a book",
-      "time": "2025-08-24T10:30:00Z"
-    },
-    {
-      "id": 6,
-      "name": "water the plants",
-      "time": "2025-08-25T16:00:00Z"
-    },
-    {
-      "id": 7,
-      "name": "practice meditation for 15 minutes",
-      "time": "2025-08-26T11:30:00Z"
-    }
+    } 
   ]
+  
   )
+  
+
   return (
     <>
     <Header/>
-
-    <AddTask tasks={tasks} setTasks={setTasks}/>
     
+    <AddTask tasks={tasks} setTasks={setTasks}/>
+    <Counter tasks={tasks}/>
     <ShowTask tasks={tasks} setTasks={setTasks}/>
     </>
   )
