@@ -1,8 +1,7 @@
 import Task from "./Task" 
 import "./ShowTask.css"
 export default function ShowTask({tasks,setTasks}) {
- 
-  
+
   return (
     <div className='list'>
     <ul>
