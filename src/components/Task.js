@@ -30,7 +30,6 @@ export default function Task({setTasks,tasks,task}) {
       return (
         <div className='li'>
           {isEditing ? (
-            // EDIT VIEW: Show input fields and Save/Cancel buttons
             <>
               <input
                 type="text"
@@ -44,16 +43,21 @@ export default function Task({setTasks,tasks,task}) {
                 value={editedTask.time}
                 onChange={handleInputChange}
               />
-              <button onClick={handleSave}>Save</button>
-              <button onClick={() => setIsEditing(false)}>Cancel</button>
+              <div className="actions">
+                <button className="save-btn" onClick={handleSave}>Save</button>
+                <button className="cancel-btn" onClick={() => setIsEditing(false)}>Cancel</button>
+              </div>
             </>
           ) : (
-            // DISPLAY VIEW: Show task details and Edit/Delete buttons
             <>
-              <p>Name: {task.name}</p>
-              <p>Time: {task.time}</p>
-              <button onClick={() => handeDelete(task.id)}>Delete</button>
-              <button onClick={() => setIsEditing(true)}>Update</button>
+              <div>
+                <p>{task.name}</p>
+                <p>{task.time}</p>
+              </div>
+              <div className="actions">
+                <button className="delete-btn" onClick={() => handeDelete(task.id)}>Delete</button>
+                <button className="update-btn" onClick={() => setIsEditing(true)}>Update</button>
+              </div>
             </>
           )}
         </div>

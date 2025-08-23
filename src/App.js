@@ -16,12 +16,14 @@ export default function App() {
 
 
   return (
-    <>
+    <div className='App'>
+
+    
     <Header/>
     
     <AddTask tasks={tasks} setTasks={setTasks}/>
     <Counter tasks={tasks}/>
     <ShowTask tasks={tasks} setTasks={setTasks}/>
-    </>
+    </div>
   )
 }

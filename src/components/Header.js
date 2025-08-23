@@ -8,7 +8,7 @@ export default function Header() {
     <>
     <header>
         <img src={logo} className='logo' alt='logo' />
-        <p className='heading'>bswl-TODO LIST</p>
+        <p className='heading'>TodoList</p>
         {/* <div className='themes'>THEMES</div> */}
         
     </header>

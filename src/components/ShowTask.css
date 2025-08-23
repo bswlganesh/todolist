@@ -1,37 +1,99 @@
-
-.list{
-    display: flex;
-  justify-content: center;
-  margin-top: 10px;
-  padding: 0 12px;           /* breathing room on small screens */
-  width: 100%;
-}
+/* ShowTask.css */
 .list ul {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);  /* Always 3 columns on desktop */
-    gap: 1rem;
-    padding: 0;
-    margin: 0;
-  }
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-  .li {
-    border: 1px solid black;
-    padding: 10px;
-    border-radius: 6px;
-    background: #fdfdfd;
-    word-break: break-word;   /* prevents text overflow */
-  }
-/* Tablet view (max 768px → 2 columns) */
-@media (max-width: 768px) {
-    .list ul {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  /* Mobile view (max 480px → 1 column) */
-  @media (max-width: 480px) {
-    .list ul {
-      grid-template-columns: 1fr;
-    }
-  }
+/* Individual Task Item Styling */
+.li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: box-shadow 0.2s ease;
+}
+
+.li:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.li p {
+  margin: 0;
+}
+
+/* The name of the task */
+.li p:first-of-type {
+  font-weight: 600;
+  color: #333;
+}
+
+/* The time of the task */
+.li p:nth-of-type(2) {
+  font-size: 0.85rem;
+  color: #777;
+  margin-left: 10px;
+}
+
+/* A container for the buttons to keep them together */
+.li .actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Styling for buttons inside a task item */
+.li button {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.li .delete-btn {
+  background-color: transparent;
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+}
+
+.li .delete-btn:hover {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.li .update-btn {
+  background-color: transparent;
+  color: #3498db;
+  border: 1px solid #3498db;
+}
+
+.li .update-btn:hover {
+  background-color: #3498db;
+  color: white;
+}
+
+/* Styling for the editing view */
+.li input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.li .save-btn {
+  background-color: #2ecc71;
+  color: white;
+}
+.li .save-btn:hover {
+  background-color: #27ae60;
+}
+
+.li .cancel-btn {
+    background-color: #95a5a6;
+    color: white;
+}
+.li .cancel-btn:hover {
+    background-color: #7f8c8d;
+}
