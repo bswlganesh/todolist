@@ -4,16 +4,16 @@ export default function AddTask({tasks,setTasks}) {
   const [name,setName]=useState("")
   function handleChange(e) { 
     setName(e.target.value)
-    console.log(name);
     
    }
   
   function HandleSubmit(e) {
     e.preventDefault();
     const task={
-      id:Math.floor(Math.random()*1000),
+      id:Math.floor(Math.random()*10000),
       name: name,
-      time:new Date().toLocaleTimeString()
+      subtasks: [],
+      completed: false
     }
     if (!name.trim()) {
       return; // Prevents adding empty tasks
@@ -26,7 +26,7 @@ export default function AddTask({tasks,setTasks}) {
       <div className='container'>
     <form onSubmit={HandleSubmit} className='form' action="">
       <input onChange={handleChange} className='input' type="text" placeholder='Add New Task' value={name}/>
-      <button  className='submit' type="submit">submit</button>
+      <button  className='submit' type="submit">Add Task</button>
     </form>
     
   </div>

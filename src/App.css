@@ -38,3 +38,20 @@ button {
   font-size: 1rem;
   transition: all 0.2s ease;
 }
+
+.app-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.undo-btn {
+  background-color: #95a5a6;
+  color: white;
+  font-weight: 600;
+}
+
+.undo-btn:hover {
+  background-color: #7f8c8d;
+}
