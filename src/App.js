@@ -1,9 +1,8 @@
 
 import './App.css'
 import Header from './components/Header'
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import React, { Suspense } from 'react';
-import RecycleBin from './components/RecycleBin'
 import HomePage from './pages/HomePage';
 
 // Lazy load the RecycleBin page for better performance
