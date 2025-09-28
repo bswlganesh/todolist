@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import "./Task.css"
 
 export default function Task({ setTasks, tasks, task, setDeletedTasks }) {
@@ -10,14 +10,19 @@ export default function Task({ setTasks, tasks, task, setDeletedTasks }) {
   const [editingSubtaskId, setEditingSubtaskId] = useState(null);
   const [editedSubtask, setEditedSubtask] = useState({});
 
-  function handeDelete(taskId) {
-    const taskToDelete = tasks.find(task => task.id === taskId);
-    setDeletedTasks(prev => [...prev, { ...taskToDelete, deletedOn: new Date() }]);
-    const updatedTasks = tasks.filter((task) => task.id !== taskId);
-    setTasks(updatedTasks);
-  }
+  const handeDelete = (taskId) => {
+    // Add deleting class for animation
+    setTasks(tasks.map(t => t.id === taskId ? { ...t, isDeleting: true } : t));
 
-  function handleUpdate(taskId, updatedData) {
+    // After animation, remove the task
+    setTimeout(() => {
+      const taskToDelete = tasks.find(task => task.id === taskId);
+      setDeletedTasks(prev => [...prev, { ...taskToDelete, deletedOn: new Date() }]);
+      setTasks(currentTasks => currentTasks.filter(t => t.id !== taskId));
+    }, 300); // Corresponds to animation duration
+  };
+
+  const handleUpdate = useCallback((taskId, updatedData) => {
     const updatedTasks = tasks.map((t) => {
       if (t.id === taskId) {
         return { ...t, ...updatedData };
@@ -25,7 +30,16 @@ export default function Task({ setTasks, tasks, task, setDeletedTasks }) {
       return t;
     });
     setTasks(updatedTasks);
-  }
+  }, [tasks, setTasks]);
+
+  useEffect(() => {
+    if (task.subtasks && task.subtasks.length > 0) {
+      const allSubtasksCompleted = task.subtasks.every(sub => sub.completed);
+      if (task.completed !== allSubtasksCompleted) {
+        handleUpdate(task.id, { completed: allSubtasksCompleted });
+      }
+    }
+  }, [task.subtasks, task.id, task.completed, handleUpdate]);
 
   function handleSubtaskChange(e) {
     setSubtaskName(e.target.value);
@@ -79,10 +93,6 @@ export default function Task({ setTasks, tasks, task, setDeletedTasks }) {
     setEditedSubtask({});
   }
 
-  function toggleTaskComplete() {
-    handleUpdate(task.id, { completed: !task.completed });
-  }
-
   function toggleSubtaskComplete(subtaskId) {
     const updatedSubtasks = task.subtasks.map(sub =>
       sub.id === subtaskId ? { ...sub, completed: !sub.completed } : sub
@@ -91,7 +101,7 @@ export default function Task({ setTasks, tasks, task, setDeletedTasks }) {
   }
 
   return (
-    <li className={`li ${task.completed ? 'completed' : ''}`}>
+    <li className={`li ${task.completed ? 'completed' : ''} ${task.isDeleting ? 'task-exit-active' : 'task-enter-active'}`}>
       <div className="task-main">
         {isEditing ? (
           <>
@@ -109,12 +119,7 @@ export default function Task({ setTasks, tasks, task, setDeletedTasks }) {
         ) : (
           <>
             <div className="task-content">
-              <input
-                type="checkbox"
-                checked={task.completed}
-                onChange={toggleTaskComplete}
-              />
-              <p className="task-name">{task.name}</p>
+              <p className={`task-name ${task.completed ? 'completed' : ''}`}>{task.name}</p>
             </div>
             <div className="actions task-actions">
               {task.subtasks && task.subtasks.length > 0 && (
@@ -152,7 +157,7 @@ export default function Task({ setTasks, tasks, task, setDeletedTasks }) {
                 </div>
               </li>
             ) : (
-              <li key={sub.id} className={`subtask-item ${sub.completed ? 'completed' : ''}`}>
+              <li key={sub.id} className={`subtask-item-wrapper ${sub.completed ? 'completed' : ''}`}>
                 <div className="subtask-content">
                   <input
                     type="checkbox"
@@ -161,7 +166,7 @@ export default function Task({ setTasks, tasks, task, setDeletedTasks }) {
                   />
                   <span className="subtask-name">{sub.name}</span>
                 </div>
-                <div className="actions">
+                <div className="actions subtask-actions-row">
                   <button className="update-btn" onClick={() => handleEditSubtask(sub)}>Update</button>
                   <button className="delete-btn" onClick={() => handleDeleteSubtask(sub.id)}>Delete</button>
                 </div>

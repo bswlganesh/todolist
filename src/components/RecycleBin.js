@@ -2,12 +2,12 @@ import React from 'react';
 import './RecycleBin.css';
 import { Link } from 'react-router-dom';
 
-export default function RecycleBin({ deletedTasks, setDeletedTasks, setTasks }) {
+export default function RecycleBin({ deletedTasks, setDeletedTasks, setTasks, tasks }) {
   const restoreTask = (taskId) => {
     const taskToRestore = deletedTasks.find(task => task.id === taskId);
     // remove deletedOn property before restoring
     const { deletedOn, ...restoredTask } = taskToRestore;
-    setTasks(prev => [...prev, restoredTask]);
+    setTasks(prev => [...(tasks || prev), restoredTask]);
     setDeletedTasks(prev => prev.filter(task => task.id !== taskId));
   };
 
