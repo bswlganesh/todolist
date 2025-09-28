@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './RecycleBin.css';
 import { Link } from 'react-router-dom';
+import TaskContext from '../context/TaskContext';
 
-export default function RecycleBin({ deletedTasks, setDeletedTasks, setTasks, tasks }) {
+function RecycleBin() {
+  const { deletedTasks, setDeletedTasks, updateTasks, tasks } = useContext(TaskContext);
   const restoreTask = (taskId) => {
     const taskToRestore = deletedTasks.find(task => task.id === taskId);
     // remove deletedOn property before restoring
     const { deletedOn, ...restoredTask } = taskToRestore;
-    setTasks(prev => [...(tasks || prev), restoredTask]);
+    updateTasks([...(tasks || []), restoredTask]);
     setDeletedTasks(prev => prev.filter(task => task.id !== taskId));
   };
 
@@ -46,3 +48,5 @@ export default function RecycleBin({ deletedTasks, setDeletedTasks, setTasks, ta
     </div>
   );
 }
+
+export default React.memo(RecycleBin);

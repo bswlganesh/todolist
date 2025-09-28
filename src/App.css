@@ -14,7 +14,7 @@ body {
 /* --- Main App Container --- */
 .App {
   max-width: 700px;
-  margin: 40px 5px; /* Center the container on the page with space on top/bottom */
+  margin: 40px auto; /* Center the container on the page */
   padding: 30px;
   background-color: #ffffff;
   border-radius: 12px;

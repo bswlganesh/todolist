@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import "./Task.css"
+import TaskContext from '../context/TaskContext';
 
-export default function Task({ setTasks, tasks, task, setDeletedTasks }) {
+function Task({ task }) {
   const [isEditing, setIsEditing] = useState(false);
+  const { tasks, updateTasks, setDeletedTasks } = useContext(TaskContext);
   const [editedTask, setEditedTask] = useState({ ...task });
   const [showSubtaskForm, setShowSubtaskForm] = useState(false);
   const [subtaskName, setSubtaskName] = useState("");
@@ -12,13 +14,13 @@ export default function Task({ setTasks, tasks, task, setDeletedTasks }) {
 
   const handeDelete = (taskId) => {
     // Add deleting class for animation
-    setTasks(tasks.map(t => t.id === taskId ? { ...t, isDeleting: true } : t));
+    updateTasks(tasks.map(t => t.id === taskId ? { ...t, isDeleting: true } : t));
 
     // After animation, remove the task
     setTimeout(() => {
       const taskToDelete = tasks.find(task => task.id === taskId);
       setDeletedTasks(prev => [...prev, { ...taskToDelete, deletedOn: new Date() }]);
-      setTasks(currentTasks => currentTasks.filter(t => t.id !== taskId));
+      updateTasks(currentTasks => currentTasks.filter(t => t.id !== taskId));
     }, 300); // Corresponds to animation duration
   };
 
@@ -29,8 +31,8 @@ export default function Task({ setTasks, tasks, task, setDeletedTasks }) {
       }
       return t;
     });
-    setTasks(updatedTasks);
-  }, [tasks, setTasks]);
+    updateTasks(updatedTasks);
+  }, [tasks, updateTasks]);
 
   useEffect(() => {
     if (task.subtasks && task.subtasks.length > 0) {
@@ -178,3 +180,5 @@ export default function Task({ setTasks, tasks, task, setDeletedTasks }) {
     </li>
   );
 }
+
+export default React.memo(Task);

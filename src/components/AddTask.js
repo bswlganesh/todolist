@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import './AddTask.css'
-export default function AddTask({tasks,setTasks}) {
+import TaskContext from '../context/TaskContext';
+export default function AddTask() {
+  const { tasks, updateTasks } = useContext(TaskContext);
   const [name,setName]=useState("")
   const [showForm, setShowForm] = useState(false);
   function handleChange(e) { 
@@ -19,7 +21,7 @@ export default function AddTask({tasks,setTasks}) {
     if (!name.trim()) {
       return; // Prevents adding empty tasks
     }
-    setTasks([...tasks, task]);
+    updateTasks([...tasks, task]);
     setName('');
     setShowForm(false);
     }
